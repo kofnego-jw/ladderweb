@@ -1,0 +1,137 @@
+<header
+  class="d-flex flex-wrap justify-content-center align-items-end pb-3 border-bottom"
+>
+  <div class="d-flex align-items-center mb-3 mb-md-0 me-md-auto header-logo">
+    <a routerLink="/home" class="link-body-emphasis text-decoration-none">
+      <img
+        class="logo"
+        src="assets/img/type-ladderweb.svg"
+        title="LadderWeb"
+        alt="LadderWeb"
+        desc="LadderWeb"
+      />
+    </a>
+  </div>
+  <div>
+    <nav
+      class="navbar navbar-expand-md navbar-light bg-light"
+      aria-label="Main Navigation"
+    >
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          (click)="toggleNavbar()"
+          aria-controls="topNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="collapse navbar-collapse"
+          [collapse]="navbarCollapsed"
+          id="topNavbar"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                routerLink="/annotate"
+                >Annotate Text</a
+              >
+            </li>
+            <li class="nav-item dropdown" *ngIf="canUser" dropdown>
+              <a
+                class="nav-link dropdown-toggle pointer"
+                aria-expanded="false"
+                dropdownToggle
+                >Manage Data</a
+              >
+              <ul class="dropdown-menu" *dropdownMenu>
+                <li>
+                  <a class="dropdown-item" routerLink="/database/text"
+                    >Texts and Annotations</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/database/creation-task"
+                    >Creation Tasks</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/database/modifier"
+                    >Modifiers</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/database/subact"
+                    >Subacts</a
+                  >
+                </li>
+                <li *ngIf="canAdmin">
+                  <a class="dropdown-item" routerLink="/database/model"
+                    >Models</a
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown" *ngIf="canAdmin" dropdown>
+              <a
+                class="nav-link dropdown-toggle pointer"
+                aria-expanded="false"
+                dropdownToggle
+                >App Admin</a
+              >
+              <ul class="dropdown-menu" *dropdownMenu>
+                <li>
+                  <a class="dropdown-item" routerLink="/admin/user"
+                    >Manage Users</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/admin/log">Show logs</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+              <a
+                class="nav-link dropdown-toggle pointer"
+                aria-expanded="false"
+                dropdownToggle
+                >User</a
+              >
+              <ul class="dropdown-menu dropdown-menu-end" *dropdownMenu>
+                <li *ngIf="!canUser">
+                  <a class="dropdown-item pointer" (click)="showLoginForm()"
+                    >Log In</a
+                  >
+                </li>
+                <li *ngIf="username">
+                  <a class="dropdown-item disabled">
+                    Logged in as: <br />
+                    {{ username }}
+                  </a>
+                </li>
+                <li *ngIf="canUser">
+                  <a
+                    class="dropdown-item pointer"
+                    (click)="showChangePasswordForm()"
+                    >Change Password</a
+                  >
+                </li>
+                <li *ngIf="canUser">
+                  <a class="dropdown-item pointer" (click)="showLogoutForm()"
+                    >Log Out</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

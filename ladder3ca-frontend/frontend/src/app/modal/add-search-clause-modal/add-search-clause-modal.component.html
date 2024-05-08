@@ -1,0 +1,124 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="searchClausesLabel">Search Clauses</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <table class="coding-scheme mb-5">
+      <thead>
+        <tr>
+          <th width="10%">Mode</th>
+          <th width="20%">Field</th>
+          <th width="65%">Query</th>
+          <th width="5%">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let clause of clauses; let index = index">
+          <td>{{ translateClauseMode(clause) }}</td>
+          <td>{{ clause.field }}</td>
+          <td>{{ translateClause(clause) }}</td>
+          <td>
+            <button class="btn btn-sm" (click)="removeClause(index)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="mt-5">
+      Add Clause use
+      <a class="btn btn-primary btn-sm px-1" (click)="toggleClauseMode()">{{
+        translateMode(clauseMode)
+      }}</a>
+    </p>
+
+    <div class="mb-3">
+      <select
+        class="form-select"
+        aria-label="Language Selector"
+        (change)="addSelectLanguageClause($event)"
+      >
+        <option selected value="">Select Text Language</option>
+        <option value="de">de</option>
+        <option value="it">it</option>
+      </select>
+    </div>
+    <form [formGroup]="textContentForm" (ngSubmit)="addFulltextSearchClause()">
+      <div class="mb-3">
+        <label for="queryString">Query string</label>
+        <input type="text" formControlName="queryString" class="form-control" />
+        <button type="submit" class="btn btn-sm btn-primary">
+          Add Fulltext Clause
+        </button>
+      </div>
+    </form>
+    <div class="mb-3">
+      <select
+        class="form-select"
+        [(ngModel)]="selectedModifier"
+        (change)="addSelectedModifier($event)"
+      >
+        <option selected [value]="undefined">
+          Text tagged with this modifier
+        </option>
+        <option *ngFor="let mod of modifierList" [ngValue]="mod">
+          {{ mod.modifierCode }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <select
+        [(ngModel)]="selectedSubact"
+        class="form-select"
+        (change)="addSelectedSubact($event)"
+      >
+        <option selected [value]="undefined">
+          Text tagged with this subact
+        </option>
+        <option *ngFor="let sub of subactList" [ngValue]="sub">
+          {{ sub.fullName }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <select
+        [(ngModel)]="selectedCreationTask"
+        class="form-select"
+        (change)="addSelectedCreationTask($event)"
+      >
+        <option selected [value]="undefined">
+          Text created using the task
+        </option>
+        <option *ngFor="let ct of creationTaskList" [ngValue]="ct">
+          {{ ct.taskName }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <select
+        class="form-select"
+        aria-label="Gender Selector"
+        (change)="addSelectedGender($event)"
+      >
+        <option selected [value]="undefined">
+          Select gender of speaker of the text
+        </option>
+        <option [value]="'F'">F</option>
+        <option [value]="'M'">M</option>
+        <option [value]="'D'">D</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="close()">
+      Close
+    </button>
+  </div>
+</div>

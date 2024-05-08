@@ -1,0 +1,193 @@
+<p class="mt-5 mb-4">
+  Here you can find a list of texts, and you can download all texts and
+  annotations
+  <a class="btn btn-primary btn-sm px-1" (click)="downloadAll()">as JSON</a>,
+  <a class="btn btn-primary btn-sm px-1" (click)="downloadAllAsTei()"
+    >as TEI/XML</a
+  >, or
+  <a class="btn btn-primary btn-sm px-1" (click)="downloadAllAsCsv()">as CSV</a
+  >.
+</p>
+
+<p>Clauses for searching:<br /></p>
+
+<div class="col-md-12 mt-1">
+  <table class="coding-scheme mb-5">
+    <thead>
+      <tr>
+        <th class="text-left" width="10%">Mode</th>
+        <th width="20%">Field</th>
+        <th width="65%">Query</th>
+        <th width="5%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let clause of clauses">
+        <td>{{ translateMode(clause) }}</td>
+        <td>{{ clause.field }}</td>
+        <td>{{ translateClause(clause) }}</td>
+        <td>
+          <button class="btn btn-sm" (click)="removeClause(clause)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" (click)="addClause()">
+    Add Clause
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="!clauses.length"
+    (click)="doSearch()"
+  >
+    Search
+  </button>
+</div>
+
+<div class="col-md-12 mt-1 mb-5">
+  <div *ngIf="!result">
+    <p>No results yet</p>
+  </div>
+  <div *ngIf="result">
+    <p>
+      Total Hits: {{ result.totalHits }}
+      <button
+        (click)="downloadSearchResult()"
+        class="btn btn-primary btn-sm mx-2"
+      >
+        Download as JSON
+      </button>
+      <button
+        (click)="downloadSearchResultAsTei()"
+        class="btn btn-primary btn-sm mx-2"
+      >
+        Download as TEI/XML
+      </button>
+      <button
+        (click)="downloadSearchResultAsCsv()"
+        class="btn btn-primary btn-sm mx-2"
+      >
+        Download as CSV
+      </button>
+    </p>
+    <table class="coding-scheme mb-3">
+      <thead>
+        <tr>
+          <th (click)="sortBy('altId')">
+            <app-sort-header
+              columnName="Alt ID"
+              fieldname="altId"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th class="text-center" (click)="sortBy('languageCode')">
+            <app-sort-header
+              columnName="Lang"
+              fieldname="languageCode"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th (click)="sortBy('textdata')">
+            <app-sort-header
+              columnName="Text"
+              fieldname="textdata"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th class="text-center" (click)="sortBy('creationTask.id')">
+            <app-sort-header
+              columnName="Task ID"
+              fieldname="creationTask.id"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th (click)="sortBy('gender')">
+            <app-sort-header
+              columnName="Gender"
+              fieldname="gender"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th (click)="sortBy('ageAtCreation')">
+            <app-sort-header
+              columnName="Age"
+              fieldname="ageAtCreation"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th (click)="sortBy('l1Language')">
+            <app-sort-header
+              columnName="L1"
+              fieldname="l1Language"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th (click)="sortBy('l2Languages')">
+            <app-sort-header
+              columnName="L2"
+              fieldname="l2Languages"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th (click)="sortBy('location')">
+            <app-sort-header
+              columnName="Loc."
+              fieldname="location"
+              [sortStatus]="sortStatus"
+            ></app-sort-header>
+          </th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hit of shownHits" class="hover">
+          <td>{{ hit.textMetadata?.altId }}</td>
+          <td class="text-center">{{ hit.textMetadata?.languageCode }}</td>
+          <td>{{ hit.textMetadata?.textdata }}</td>
+          <td style="text-align: center">
+            <span
+              [innerHTML]="hit.textMetadata?.creationTask?.id"
+              [ngbTooltip]="getCreationTaskName(hit.textMetadata)"
+            ></span>
+          </td>
+          <td>{{ hit.textMetadata?.gender }}</td>
+          <td>{{ hit.textMetadata?.ageAtCreation }}</td>
+          <td>{{ hit.textMetadata?.l1Language }}</td>
+          <td>{{ hit.textMetadata?.l2Languages }}</td>
+          <td>{{ hit.textMetadata?.location }}</td>
+          <td class="text-center">
+            <button class="btn btn-sm" (click)="updateText(hit.textMetadata)">
+              <fa-icon [icon]="faPencil"></fa-icon>
+            </button>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm" (click)="deleteText(hit.textMetadata)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm" (click)="annotateText(hit.textMetadata)">
+              <fa-icon [icon]="faTag"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination justify-content-end">
+      <pagination
+        [itemsPerPage]="pagingStatus.pageSize"
+        [totalItems]="filteredHits.length"
+        [ngModel]="pagingStatus.currentPage"
+        (pageChanged)="onPageChanged($event)"
+      ></pagination>
+    </div>
+  </div>
+</div>

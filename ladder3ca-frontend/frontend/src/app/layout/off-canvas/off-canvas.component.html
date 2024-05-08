@@ -1,0 +1,83 @@
+<button
+  id="about-off-canvas"
+  class="btn btn-primary btn-lg animate__animated animate__slideInLeft"
+  type="button"
+  (click)="toggleMyOffCanvas()"
+  aria-controls="offcanvasWithBothOptions"
+>
+  About
+</button>
+
+<div
+  class="offcanvas offcanvas-start"
+  data-bs-scroll="true"
+  tabindex="-1"
+  #myOffCanvas
+  id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+      About LadderWeb
+    </h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="toggleMyOffCanvas()"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a
+          routerLink="/about/data-collection"
+          routerLinkActive="active"
+          class="nav-link"
+          aria-current="page"
+          >Data Collection
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/about/training-data-overview"
+          class="nav-link"
+          routerLinkActive="active"
+          >Training Data Overview
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/about/coding-scheme"
+          class="nav-link"
+          routerLinkActive="active"
+          >Coding Scheme
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/about/how-to-use"
+          class="nav-link"
+          routerLinkActive="active"
+          >How to Use
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/about/related-publications"
+          class="nav-link"
+          routerLinkActive="active"
+          >Related Publications
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/about/contributors"
+          class="nav-link"
+          routerLinkActive="active"
+          >Contributors
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

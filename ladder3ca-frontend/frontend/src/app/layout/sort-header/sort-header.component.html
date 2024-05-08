@@ -1,0 +1,8 @@
+<a class="pointer nowrap" (click)="emitField()"
+  >{{ columnName }}
+  <fa-icon *ngIf="arrowStat === ArrowStatus.UP" [icon]="faArrowUp"></fa-icon>
+  <fa-icon
+    *ngIf="arrowStat === ArrowStatus.DOWN"
+    [icon]="faArrowDown"
+  ></fa-icon>
+</a>

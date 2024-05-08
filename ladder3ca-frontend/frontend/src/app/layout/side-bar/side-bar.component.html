@@ -1,0 +1,63 @@
+<div class="pe-3">
+  <div class="d-lg-none" style="position: fixed; right: 18px">
+    <button class="btn btn-sm btn-primary" (click)="toggleMenuVisible()">
+      <fa-icon [icon]="faBars"></fa-icon>
+    </button>
+  </div>
+  <div
+    class="d-lg-none"
+    [hidden]="!menuVisible"
+    style="overflow-y: scroll; max-height: 70vh"
+  >
+    <ng-container *ngTemplateOutlet="menu"></ng-container>
+  </div>
+  <div class="d-none d-lg-block" id="sidebar">
+    <ng-container *ngTemplateOutlet="menu"></ng-container>
+  </div>
+</div>
+
+<ng-template #menu>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a routerLink="/database/text" routerLinkActive="active" class="nav-link">
+        Texts and Annotations
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="/database/creation-task"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Creation Tasks
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="/database/modifier"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Modifiers
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="/database/subact"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Subacts
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        routerLink="/database/model"
+        routerLinkActive="active"
+        class="nav-link"
+      >
+        Models
+      </a>
+    </li>
+  </ul>
+</ng-template>

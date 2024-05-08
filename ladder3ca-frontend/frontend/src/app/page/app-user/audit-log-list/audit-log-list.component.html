@@ -1,0 +1,19 @@
+<h1 class="mb-5">Show Logs</h1>
+<div class="col-md-12 mt-1">
+  <table class="coding-scheme mb-3">
+    <thead>
+      <tr>
+        <th width="10%">Time</th>
+        <th width="85%">Event</th>
+        <th width="5%" class="text-center">User ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of logs" class="hover">
+        <td>{{ log.creationTime * 1000 | date : "yyyyMMdd-HHmmss" }}</td>
+        <td class="log-content">{{ log.content }}</td>
+        <td class="text-center">{{ log.userId }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

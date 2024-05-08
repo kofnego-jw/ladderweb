@@ -1,0 +1,41 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">Select Modifiers</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="close()"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3 row">
+      <p>Please select modifiers for the token: {{ token }}</p>
+    </div>
+    <div class="mb-3 row">
+      <p>
+        <button
+          *ngFor="let mod of modifierList"
+          class="btn btn-sm mx-2"
+          [ngClass]="{ active: isActive(mod) }"
+          (click)="toggleModifier(mod)"
+        >
+          {{ mod.modifierCode }}
+        </button>
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      data-bs-dismiss="modal"
+      (click)="close()"
+    >
+      Close
+    </button>
+    <button type="submit" class="btn btn-primary" (click)="updateModifiers()">
+      Edit Modifiers
+    </button>
+  </div>
+</div>

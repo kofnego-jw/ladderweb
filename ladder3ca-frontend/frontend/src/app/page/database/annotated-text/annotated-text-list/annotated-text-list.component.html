@@ -1,0 +1,93 @@
+<p class="mt-5">Recently modified texts are listed here.</p>
+
+<div class="col-md-12 mt-1 mb-5">
+  <table class="coding-scheme mb-3">
+    <thead>
+      <tr>
+        <th (click)="sortBy('altId')">
+          <app-sort-header
+            columnName="Alt ID"
+            fieldname="altId"
+            [sortStatus]="sortStatus"
+          ></app-sort-header>
+        </th>
+        <th class="text-center" (click)="sortBy('languageCode')">
+          <app-sort-header
+            columnName="Lang"
+            fieldname="languageCode"
+            [sortStatus]="sortStatus"
+          ></app-sort-header>
+        </th>
+        <th class="pointer" (click)="sortBy('lastModified')">
+          <app-sort-header
+            columnName="changed"
+            fieldname="lastModified"
+            [sortStatus]="sortStatus"
+          ></app-sort-header>
+        </th>
+        <th class="pointer" (click)="sortBy('textdata')">
+          <app-sort-header
+            columnName="Text"
+            fieldname="textdata"
+            [sortStatus]="sortStatus"
+          ></app-sort-header>
+        </th>
+        <th class="text-center" (click)="sortBy('creationTask.id')">
+          <app-sort-header
+            columnName="Task ID"
+            fieldname="creationTask.id"
+            [sortStatus]="sortStatus"
+          ></app-sort-header>
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let text of shownTextList" class="hover">
+        <td>{{ text.altId }}</td>
+        <td class="text-center">{{ text.languageCode }}</td>
+        <td>{{ text.lastModified * 1000 | date : "MM-dd HH:mm" }}</td>
+        <td>{{ text.textdata }}</td>
+        <td style="text-align: center">
+          <span
+            [innerHTML]="text.creationTask?.id"
+            [ngbTooltip]="getCreationTaskName(text)"
+          ></span>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-sm" (click)="updateText(text)">
+            <fa-icon [icon]="faPencil"></fa-icon>
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-sm" (click)="deleteText(text)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-sm" (click)="annotateText(text)">
+            <fa-icon [icon]="faTag"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    You can also
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" (click)="createNewText()">
+      Add as new Text
+    </button>
+  </p>
+
+  <div class="pagination justify-content-end">
+    <pagination
+      [totalItems]="filteredTextList.length"
+      [ngModel]="pagingStatus.currentPage"
+      (pageChanged)="onPageChanged($event)"
+    ></pagination>
+  </div>
+</div>
+<!-- /col-md-12 mt-1 -->

@@ -1,0 +1,45 @@
+<div
+  *ngIf="
+    result &&
+    result.result &&
+    result.result.originalText &&
+    result.result.tokenInfos
+  "
+>
+  <h2 class="mt-5 mb-4">Result</h2>
+  <p class="mb-5">
+    Text for annotation:<br />
+    <strong [innerHtml]="result.result.originalText"></strong>
+  </p>
+
+  <p>Annotation result:<br /></p>
+
+  <div class="col-md-12 mt-1">
+    <table class="coding-scheme mb-5">
+      <thead>
+        <tr>
+          <th class="text-left">Token</th>
+          <th>Tags</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let token of result.result.tokenInfos">
+          <td>{{ token.token }}</td>
+          <td>
+            <span *ngFor="let tag of token.tags">{{ tag }} <br /></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      [hidden]="!canUser"
+      (click)="addAsNewText()"
+    >
+      Add as new Text
+    </button>
+  </div>
+</div>

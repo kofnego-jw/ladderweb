@@ -1,0 +1,50 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="editCreationTask">Edit Creation Task</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="close()"
+    ></button>
+  </div>
+  <form [formGroup]="creationTaskForm" (ngSubmit)="updateCreationTask()">
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="taskName" class="form-label">Task Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="taskName"
+          formControlName="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          formControlName="desc"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category</label>
+        <input
+          type="text"
+          class="form-control"
+          id="category"
+          formControlName="category"
+        />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="close()">
+        Close
+      </button>
+      <button type="submit" class="btn btn-secondary">
+        Edit Creation Task
+      </button>
+    </div>
+  </form>
+</div>

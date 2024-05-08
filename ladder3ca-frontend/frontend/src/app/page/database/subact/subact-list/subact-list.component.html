@@ -1,0 +1,49 @@
+<div class="col-md-12 mt-1 my-5">
+  <table class="coding-scheme mt-4 mb-3">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th>Subact Name</th>
+        <th class="text-center">Parent ID</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subact of shownSubactList" class="hover">
+        <td class="text-center">{{ subact.id }}</td>
+        <td>{{ subact.fullName }}</td>
+        <td class="text-center">{{ subact.parentSubactId }}</td>
+        <td>{{ subact.desc }}</td>
+        <td class="text-center">
+          <button class="btn btn-tertiary" (click)="updateSubact(subact)">
+            <fa-icon [icon]="faPencil"></fa-icon>
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-tertiary" (click)="deleteSubact(subact)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    You can also
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" (click)="createNewSubact()">
+      add new Subact Tag
+    </button>
+  </p>
+  <div class="pagination justify-content-end">
+    <pagination
+      [totalItems]="filteredSubactList.length"
+      [ngModel]="pagingStatus.currentPage"
+      (pageChanged)="onPageChanged($event)"
+    ></pagination>
+  </div>
+  <!-- pagination -->
+</div>
+<!-- /col-md-12 mt-1 -->

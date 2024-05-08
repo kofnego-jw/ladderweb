@@ -1,0 +1,52 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="editSubactTags">Edit Subact Tag</h5>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="close()"
+    ></button>
+  </div>
+  <form [formGroup]="subactForm" (ngSubmit)="updateSubact()">
+    <div class="modal-body">
+      <div class="mb-3">
+        <label for="modifierName" class="form-label">Subact Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="modifierName"
+          formControlName="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          formControlName="desc"
+        />
+      </div>
+      <div class="mb-5">
+        <label for="description" class="form-label">Parent Subact</label>
+        <select
+          class="form-select"
+          aria-label="Parent Subact Selector"
+          formControlName="parent"
+        >
+          <option selected [value]="undefined">--</option>
+          <option *ngFor="let parent of parents" [value]="parent.id">
+            {{ parent.fullName }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="close()">
+        Close
+      </button>
+      <button type="submit" class="btn btn-secondary">Edit Subact Tag</button>
+    </div>
+  </form>
+</div>

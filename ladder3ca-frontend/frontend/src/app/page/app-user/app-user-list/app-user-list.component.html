@@ -1,0 +1,44 @@
+<h1 class="mb-5">Manage Users</h1>
+
+<div class="col-md-12 mt-1">
+  <table class="coding-scheme mb-3" *ngIf="users.length">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th>Email address</th>
+        <th>Roles</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" class="hover">
+        <td class="text-center">{{ user.id }}</td>
+        <td>{{ user.emailAddress }}</td>
+        <td>
+          <span class="versal">
+            {{ user.roles.join(", ") }}
+          </span>
+        </td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-tertiary"
+            (click)="changePassword(user)"
+          >
+            Change Password
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-tertiary" (click)="updateUser(user)">
+            Edit
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    You can also
+    <a class="btn" (click)="addUser()">add a User</a>
+  </p>
+</div>
+<!-- /col-md-12 mt-1 -->

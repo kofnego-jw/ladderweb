@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+
+// @import "./scss/sb-admin.scss";
+
+@import "./scss/bootstrap.min.css";
+@import "./scss/ladder.css";
+@import "./scss/animate.min.css";
+
+#wrapper {
+  margin: calc(56px + 1rem) auto 1rem;
+  @media (min-width: 768px) {
+    height: calc(80vh - 2rem);
+    overflow: hidden;
+  }
+}
+
+#wrapperFullWidth {
+  width: 100%;
+  max-width: 100%;
+  padding-bottom: 5rem;
+}
+
+#sidebar {
+  overflow: auto;
+  height: calc(80vh - 3rem);
+  padding-top: 1rem;
+  .nav-item {
+    width: 100%;
+    .nav-link {
+      padding: 0.2rem 0 0.2rem 0.5rem;
+    }
+  }
+}
+
+.hover:hover {
+  background-color: lightblue;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.corpus-table {
+  td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: white;
+  }
+  td:hover {
+    overflow: visible;
+    white-space: normal;
+  }
+}
+
+.log-content {
+  overflow-wrap: break-word;
+  max-width: 60vw;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+app\-sort\-header a {
+  font-weight: bold;
+  color: #282725 !important;
+  text-decoration: none;
+}

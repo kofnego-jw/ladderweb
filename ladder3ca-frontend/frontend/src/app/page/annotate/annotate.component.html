@@ -1,0 +1,123 @@
+<div class="row g-5 fs-5 pt-3">
+  <h1 class="mb-5">Annotate Text</h1>
+  <tabset #annotateTabs id="ladderTab">
+    <tab heading="Annotate">
+      <div
+        class="tab-pane fade show active"
+        id="annotate"
+        role="tabpanel"
+        aria-labelledby="annotate-tab"
+      >
+        <h2 class="mt-5 mb-4">Annotate</h2>
+
+        <form [formGroup]="annotateForm">
+          <div class="row g-5 fs-5 pt-3 mb-3">
+            <div class="col-md-5">
+              <label for="textInput" class="form-label">Enter a text</label>
+              <textarea
+                class="form-control"
+                formControlName="text"
+                maxlenght="20"
+                rows="3"
+                placeholder=""
+                id="textInput"
+              ></textarea>
+            </div>
+            <div class="col-md-5 form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="show-all"
+                formControlName="useMax"
+              />
+              <label class="form-check-label" for="show-all"
+                >Show all possible annotations</label
+              >
+              <select
+                class="form-select"
+                formControlName="language"
+                aria-label="Language Selector"
+              >
+                <option [ngValue]="null">Select Language</option>
+                <option
+                  *ngFor="let language of availableLanguages"
+                  [ngValue]="language"
+                >
+                  {{ language }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <button
+                type="submit"
+                (click)="doAnnotate()"
+                class="btn btn-primary"
+              >
+                Annotate
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </tab>
+    <tab heading="Result">
+      <app-annotation-result [result]="result"></app-annotation-result>
+    </tab>
+    <tab heading="Modifier and Subact Selections">
+      <div id="modifier">
+        <h2 class="mt-5 mb-2">Modifier and Subact Selection</h2>
+        <p class="mb-5">
+          You can select/deselect specific modifiers and subacts for annotation
+          purposes.
+        </p>
+        <h3>
+          Modifiers:
+          <a (click)="selectAllModifiers()" class="btn btn-primary btn-sm px-4"
+            >Select all</a
+          >
+        </h3>
+        <div class="row g-5">
+          <div class="col-md-12 justify-content-between button-container">
+            <a
+              *ngFor="let mod of availableModifiers"
+              class="btn btn-primary btn-sm px-1"
+              [ngClass]="{ active: modifierIsSelected(mod) }"
+              (click)="toggleModifier(mod)"
+            >
+              {{ mod.modifierCode }}
+            </a>
+          </div>
+        </div>
+        <h3 class="mt-5">
+          Subacts:
+          <a (click)="selectAllSubacts()" class="btn btn-primary btn-sm px-4"
+            >Select all</a
+          >
+        </h3>
+        <div class="row g-5">
+          <div class="col-md-12 justify-content-between button-container">
+            <div *ngFor="let displayed of displayedSubacts">
+              <a
+                class="btn btn-primary btn-sm px-1"
+                (click)="toggleSubact(displayed.main)"
+                [ngClass]="{ active: subactIsSelected(displayed.main) }"
+              >
+                {{ displayed.main.subactName }}
+              </a>
+              <div class="ps-3" *ngIf="displayed.subs.length">
+                <a
+                  *ngFor="let sub of displayed.subs"
+                  class="btn btn-primary btn-sm px-1"
+                  (click)="toggleSubact(sub)"
+                  [ngClass]="{ active: subactIsSelected(sub) }"
+                >
+                  {{ sub.subactName }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+</div>

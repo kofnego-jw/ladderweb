@@ -1,0 +1,54 @@
+<p class="mt-5">The dataset has been created with the following tasks:</p>
+
+<div class="col-md-12 mt-1 mb-5">
+  <table class="coding-scheme mb-3">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th>Task Name</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of shownCreationTaskList" class="hover">
+        <td>{{ task.id }}</td>
+        <td>{{ task.taskName }}</td>
+        <td>{{ task.category }}</td>
+        <td>{{ task.desc }}</td>
+        <td>
+          <button class="btn btn-sm" (click)="updateCreationTask(task)">
+            <fa-icon [icon]="faPencil"></fa-icon>
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-sm" (click)="deleteCreationTask(task)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    You can also
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="createNewCreationTask()"
+    >
+      add new Creation Task
+    </button>
+  </p>
+
+  <div class="pagination justify-content-end">
+    <pagination
+      [totalItems]="filteredCreationTaskList.length"
+      [ngModel]="pagingStatus.currentPage"
+      (pageChanged)="onPageChanged($event)"
+    ></pagination>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row g-5 fs-5 pt-3">
+  <h1 class="mb-5">Train Models</h1>
+
+  <div class="col-md-11 mt-1">
+    <p>Currently, the training {{ isTraining ? "is" : "is not" }} running.</p>
+    <p *ngIf="!isTraining">
+      Click
+      <a (click)="retrainAll()" class="btn btn-primary btn-md px-4">here</a> to
+      start training.
+    </p>
+    <div *ngIf="modelMessages.length">
+      <h4>Modifiers</h4>
+      <div *ngFor="let mod of modifierList">
+        <p>{{ mod.modifierCode }} ({{ mod.id }})</p>
+        <ul *ngFor="let language of languages">
+          <li>
+            {{ language }}
+            <ul *ngFor="let msg of getModifierModelMessage(mod, language)">
+              <li>{{ msg }}</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <h4>Subacts</h4>
+      <div *ngFor="let sub of subactList">
+        <p>{{ sub.subactName }} ({{ sub.id }})</p>
+        <ul *ngFor="let language of languages">
+          <li>
+            {{ language }}
+            <ul *ngFor="let msg of getSubactModelMessage(sub, language)">
+              <li>{{ msg }}</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /col-md-11 mt-1 -->
+</div>

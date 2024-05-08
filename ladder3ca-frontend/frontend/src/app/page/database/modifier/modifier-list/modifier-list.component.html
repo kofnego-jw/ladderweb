@@ -1,0 +1,45 @@
+<div class="col-md-12 mt-1 my-5">
+  <table class="coding-scheme mt-4 mb-3">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th>Modifier Name</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let modifier of shownModifierList" class="hover">
+        <td>{{ modifier.id }}</td>
+        <td>{{ modifier.modifierCode }}</td>
+        <td>{{ modifier.desc }}</td>
+        <td class="text-center">
+          <button class="btn btn-sm" (click)="updateModifier(modifier)">
+            <fa-icon [icon]="faPencil"></fa-icon>
+          </button>
+        </td>
+        <td class="text-center">
+          <button class="btn btn-sm" (click)="deleteModifier(modifier)">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    You can also
+    <button class="btn btn-primary" (click)="createNewModifier()">
+      add new modifier tag
+    </button>
+  </p>
+
+  <div class="pagination justify-content-end">
+    <pagination
+      [totalItems]="filteredModifierList.length"
+      [ngModel]="pagingStatus.currentPage"
+      (pageChanged)="onPageChanged($event)"
+    ></pagination>
+  </div>
+</div>

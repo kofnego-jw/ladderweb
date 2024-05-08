@@ -1,0 +1,21 @@
+<h1 class="mb-5">Text Database</h1>
+
+<div class="row">
+  <div class="col">
+    <tabset #textTabset id="ladderTab">
+      <tab heading="Last Changes" (selectTab)="onSelect($event)">
+        <app-annotated-text-list></app-annotated-text-list>
+      </tab>
+      <tab heading="Find Texts" (selectTab)="onSelect($event)">
+        <app-find-annotated-text></app-find-annotated-text>
+      </tab>
+      <tab heading="Edit Annotations">
+        <router-outlet></router-outlet>
+      </tab>
+      <tab heading="Help" (selectTab)="onSelect($event)">
+        <p class="mt-5">Help information</p>
+        <p></p>
+      </tab>
+    </tabset>
+  </div>
+</div>
